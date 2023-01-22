@@ -1,40 +1,11 @@
-<!-- <mat-form-field>
+<mat-form-field>
   <mat-label>Select Competition</mat-label>
-  <mat-select [(value)]="selectedCompetition" (change)="changeState()">
+  <mat-select [value]="selectedCompetition">
     <mat-option
       *ngFor="let competition of competitions"
       [value]="competition.id"
     >
       {{ competition.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field>
-  <mat-label>Select Matchday</mat-label>
-  <mat-select [(value)]="selectedMatchday" (change)="getMatches()">
-    <mat-option *ngFor="let i of matchdays as matchday" [value]="matchday">
-      {{ i }}
-    </mat-option>
-  </mat-select>
-</mat-form-field> -->
-
-<mat-form-field>
-  <mat-label>Select Competition</mat-label>
-  <mat-select [(value)]="selectedCompetition" (valueChange)="changeState()">
-    <mat-option
-      *ngFor="let competition of competitions"
-      [value]="competition.id"
-    >
-      {{ competition.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Select Matchday</mat-label>
-  <mat-select [(value)]="selectedMatchday" (change)="getMatches()">
-    <mat-option *ngFor="let i of matchdays as matchday" [value]="matchday">
-      {{ i }}
     </mat-option>
   </mat-select>
 </mat-form-field>

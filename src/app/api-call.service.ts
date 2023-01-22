@@ -11,36 +11,19 @@ export class ApiCallService {
     'X-Auth-Token': '65a2ef03bcc349f5a8fc6616e8490fbb',
   });
   constructor(private http: HttpClient) {}
+
   getCompetitions() {
-    const url = 'https://api.football-data.org/v2/competitions/';
+    const url = 'https://api.football-data.org/v4/competitions/';
     return this.http.get(url, { headers: this.headers }).pipe(
-      map((data: any) =>
-        data.competitions.map(
-          (competition: { id: any; name: string; code: string }) => ({
-            id: competition.id,
-            name: competition.name,
-            code: competition.code,
-          })
-        )
-      )
+      map((data: any) => {
+        const competitionIds = [
+          2019, 2014, 2016, 2013, 2000, 2018, 2015, 2012, 2003, 2084, 2017,
+          2021, 2000,
+        ];
+        return data.competitions.filter((competition: { id: number }) =>
+          competitionIds.includes(competition.id)
+        );
+      })
     );
   }
-  getMatches(competitionId: number, matchday: number) {
-    const url = `https://api.football-data.org/v4/${competitionId}/matches?matchday=${matchday}`;
-    return this.http.get(url, { headers: this.headers });
-  }
-
-  getMatchdays(competitionId: number) {
-    const url = `http://api.football-data.org/v4/competitions/2003/matches?matchday=1 `;
-    console.log(url);
-    return this.http
-      .get(url, { headers: this.headers })
-      .pipe(
-        map((data: any) =>
-          data.filter.map((match: { matchday: any }) => match.matchday)
-        )
-      );
-  }
 }
-
-// championsleauge, Primeira lIGA, Premier leauge england, eredivisie netherlands, bundesliga germany , ligue 1 france, serie a italy , la liga spain, chamionship england, serie a brazil, worldcup world, europe cchampionships
