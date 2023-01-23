@@ -14,7 +14,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GameListComponent } from './game-list/game-list.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +38,12 @@ import { GameListComponent } from './game-list/game-list.component';
     MatIconModule,
     HttpClientModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
