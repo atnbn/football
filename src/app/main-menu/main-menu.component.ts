@@ -35,11 +35,9 @@ export class MainMenuComponent {
     this.competitions.find((competition: any) => {
       if (competition.id === this.selectedCompetition) {
         this.matchdays = competition.currentSeason.currentMatchday;
-        console.log(this.matchdays);
         this.matchdayArray = [...Array(this.matchdays).keys()].map(
           (x) => x + 1
         );
-        console.log(this.matchdayArray);
       }
     });
   }
@@ -51,7 +49,6 @@ export class MainMenuComponent {
       this.apiCallService.getMatchdays(this.selectedCompetition).subscribe(
         (matchdays) => {
           this.matchdays = matchdays;
-          console.log(this.matchdays);
         },
         (error) => {
           console.log(error);
@@ -67,6 +64,7 @@ export class MainMenuComponent {
         .subscribe(
           (matches) => {
             this.matches = matches;
+            // this.sortByDate();
             console.log(this.matches);
             this.isVisible = true;
           },
@@ -75,5 +73,13 @@ export class MainMenuComponent {
           }
         );
     }
+  }
+  sortByDate() {
+    this.matches.sort(
+      (
+        a: { utcDate: string | number | Date },
+        b: { utcDate: string | number | Date }
+      ) => new Date(a.utcDate).getTime() - new Date(b.utcDate).getTime()
+    );
   }
 }

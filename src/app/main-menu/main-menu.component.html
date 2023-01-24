@@ -22,11 +22,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </mat-card-content>
-  <mat-card-footer>
-    <button mat-button color="primary" (click)="getMatches()">
+    <button mat-flat-button color="primary" (click)="getMatches()">
       <mat-icon>add</mat-icon> <span>Search</span>
     </button>
-  </mat-card-footer>
+  </mat-card-content>
 </mat-card>
 <app-game-list [matches]="matches" *ngIf="isVisible"></app-game-list>
