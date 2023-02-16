@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-
+import { NgModel } from '@angular/forms';
 @Component({
   selector: 'app-game-list',
   templateUrl: './game-list.component.html',

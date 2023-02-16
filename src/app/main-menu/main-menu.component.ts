@@ -1,6 +1,6 @@
 import { Component, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { ApiCallService } from '../api-call.service';
-import { GameListComponent } from '../game-list/game-list.component';
+import { ApiCallService } from '../services/api-call.service';
+
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
@@ -14,23 +14,39 @@ export class MainMenuComponent {
   matches: any;
   matchdays: number | undefined;
   matchdayArray: number[] = [];
+
   constructor(private apiCallService: ApiCallService) {}
 
   ngOnInit(): void {
     this.callCompetitions();
   }
 
-  callCompetitions() {
-    this.apiCallService.getCompetitions().subscribe(
-      (competitions) => {
-        this.competitions = competitions;
-        console.log(competitions);
-      },
-      (error) => {
+  // Await Method
+  async callCompetitions() {
+    try {
+      this.competitions = await this.apiCallService
+        .getCompetitions()
+        .toPromise();
+      console.log(this.competitions);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getMatches() {
+    if (this.selectedCompetition && this.selectedMatchday) {
+      try {
+        this.matches = await this.apiCallService
+          .getMatches(this.selectedCompetition, this.selectedMatchday)
+          .toPromise();
+        console.log('DAta for matches', this.matches);
+        this.isVisible = true;
+      } catch (error) {
         console.log(error);
       }
-    );
+    }
   }
+
   checkValue() {
     this.competitions.find((competition: any) => {
       if (competition.id === this.selectedCompetition) {
@@ -41,22 +57,24 @@ export class MainMenuComponent {
       }
     });
   }
+}
 
-  loadMatchdays() {
-    console.log(this.selectedCompetition);
+// Subscribe Method
 
-    if (this.selectedCompetition) {
-      this.apiCallService.getMatchdays(this.selectedCompetition).subscribe(
-        (matchdays) => {
-          this.matchdays = matchdays;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+/*callCompetitions() {
+  this.apiCallService.getCompetitions().subscribe(
+    (competitions) => {
+      this.competitions = competitions;
+      console.log(competitions);
+    },
+    (error) => {
+      console.log(error);
     }
-  }
+  );
+}*/
+// Subscribe Method
 
+/*
   getMatches() {
     if (this.selectedCompetition && this.selectedMatchday) {
       this.apiCallService
@@ -74,12 +92,4 @@ export class MainMenuComponent {
         );
     }
   }
-  sortByDate() {
-    this.matches.sort(
-      (
-        a: { utcDate: string | number | Date },
-        b: { utcDate: string | number | Date }
-      ) => new Date(a.utcDate).getTime() - new Date(b.utcDate).getTime()
-    );
-  }
-}
+*/
