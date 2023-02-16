@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSortModule } from '@angular/material/sort';
 import { ShortenPipe } from './shorten.pipe';
+import { FilterPipe } from './filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { ShortenPipe } from './shorten.pipe';
     MainMenuComponent,
     GameListComponent,
     ShortenPipe,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
