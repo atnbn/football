@@ -1,5 +1,6 @@
-import { Component, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
+import {Competitions} from "../Interfaces/competitions";
 
 @Component({
   selector: 'app-main-menu',
@@ -48,7 +49,7 @@ export class MainMenuComponent {
   }
 
   checkValue() {
-    this.competitions.find((competition: any) => {
+    this.competitions.find((competition: Competitions) => {
       if (competition.id === this.selectedCompetition) {
         this.matchdays = competition.currentSeason.currentMatchday;
         this.matchdayArray = [...Array(this.matchdays).keys()].map(
