@@ -9,7 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSortModule } from '@angular/material/sort';
 import { ShortenPipe } from './shorten.pipe';
 import { FilterPipe } from './filter.pipe';
+import {TokenInterceptor} from "./services/token.interceptor";
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,9 @@ import { FilterPipe } from './filter.pipe';
     MatListModule,
     MatSortModule,
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS,
+  useClass: TokenInterceptor,
+  multi:true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
